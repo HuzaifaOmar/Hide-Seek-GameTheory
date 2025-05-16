@@ -15,13 +15,11 @@ class GameGrid:
         self.size = size
         self.place_types = []
         self.base_scores = {
-            PlaceType.EASY: (1, 2),  # Easy: if seeker wins gets 1 point,if hider gets 2 points
-            PlaceType.NEUTRAL: (1, 1),  # Neutral: Both get 1 point when winning
+            PlaceType.EASY: (1, 3),  # Easy: if seeker wins gets 1 point,if hider gets 2 points
+            PlaceType.NEUTRAL: (2, 2),  # Neutral: Both get 1 point when winning
             PlaceType.HARD: (3, 1)  # Hard: if seeker wins gets 3 points, if hider wins gets 1 point
         }
-
         self._generate_place_types()
-
         self.base_payoff_matrix = self._generate_base_payoff_matrix()
 
     def _generate_place_types(self):
@@ -44,7 +42,7 @@ class GameGrid:
                 if hider_pos == seeker_pos:
                     payoff_matrix[hider_pos][seeker_pos] = -self.base_scores[self.get_place_type(seeker_pos)][0]
                 else:
-                    payoff_matrix[hider_pos][seeker_pos] = -self.base_scores[self.get_place_type(seeker_pos)][1]
+                    payoff_matrix[hider_pos][seeker_pos] = self.base_scores[self.get_place_type(seeker_pos)][1]
 
         return payoff_matrix
 
@@ -88,14 +86,25 @@ class GameGrid:
         cols = self.get_2d_grid_dimension()[1]
         return row * cols + col
 
-    def _get_manhattan_distance(self, pos1, pos2):
+    # WARN: Chebyshev distance implies that in case of 2d grid
+    # the number of possible choices must be >= 9
+    def _get_chebyshev_distance(self, pos1, pos2):
         row1, col1 = self._get_2d_coordinates(pos1)
         row2, col2 = self._get_2d_coordinates(pos2)
-        return abs(row1 - row2) + abs(col1 - col2)
+        return max(abs(row1 - row2), abs(col1 - col2))
 
     def get_2d_proximity_payoff_matrix(self):
         proximity_matrix = self.base_payoff_matrix.copy()
-        # TODO: implement 2D proximity payoff matrix
+        for hider_pos in range(self.size):
+            for seeker_pos in range(self.size):
+                if hider_pos != seeker_pos:
+                    distance = self._get_chebyshev_distance(hider_pos, seeker_pos)
+                    multiplier = 1.0
+                    if distance == 1:
+                        multiplier = 0.5
+                    elif distance == 2:
+                        multiplier = 0.75
+                    proximity_matrix[hider_pos][seeker_pos] *= multiplier
         return proximity_matrix
 
     def get_payoff_matrix(self, use_proximity=False, use_2d=False):
@@ -106,9 +115,56 @@ class GameGrid:
         return self.base_payoff_matrix
 
     def print_1d_game_grid(self):
-        # TODO: implement 1D grid printing
-        pass
+        result = "1D Game Grid:\n"
+        for i in range(self.size):
+            place_type = self.get_place_type(i)
+            seeker_score = self.base_scores[place_type][0]
+            hider_score = self.base_scores[place_type][1]
+
+            if place_type == PlaceType.EASY:
+                result += f"Position {i}: EASY (Seeker win: +{seeker_score}, Hider win: +{hider_score})\n"
+            elif place_type == PlaceType.NEUTRAL:
+                result += f"Position {i}: NEUTRAL (Seeker win: +{seeker_score}, Hider win: +{hider_score})\n"
+            else:
+                result += f"Position {i}: HARD (Seeker win: +{seeker_score}, Hider win: +{hider_score})\n"
+
+        print(result)
 
     def print_2d_game_grid(self):
-        # TODO: implement 2D grid printing
-        pass
+        rows, cols = self.get_2d_grid_dimension()
+        result = "2D Game Grid:\n"
+        for row in range(rows):
+            line = ""
+            for col in range(cols):
+                pos = self._get_1d_position(row, col)
+                if pos < self.size:
+                    place_type = self.get_place_type(pos)
+                    if place_type == PlaceType.EASY:
+                        line += "E "
+                    elif place_type == PlaceType.NEUTRAL:
+                        line += "N "
+                    else:
+                        line += "H "
+                else:
+                    line += "  "
+            result += line + "\n"
+        result += "\nLegend: E=Easy, N=Neutral, H=Hard\n"
+
+        result += "\nChebyshev Distance Example:\n"
+        if self.size >=9:
+            center = self.size//2
+            row_c, col_c = self._get_2d_coordinates(center)
+            result += f"Distances from position ({row_c}, {col_c})\n"
+
+            for row in range(rows):
+                line = ""
+                for col in range(cols):
+                    pos = self._get_1d_position(row, col)
+                    if pos < self.size:
+                        distance = self._get_chebyshev_distance(center, pos)
+                        line += f"{distance} "
+                    else:
+                        line += "  "
+                result += line + "\n"
+
+        print(result)
