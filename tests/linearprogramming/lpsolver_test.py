@@ -47,19 +47,24 @@ def display_solution(payoff_matrix, player="hider"):
 # Example usage
 if __name__ == "__main__":
     # Example from the assignment
-    payoff_matrix = np.array([
+    payoff_matrix1 = np.array([
         [-1, 1, 1, 1],
         [2, -1, 2, 2],
         [1, 1, -3, 1],
         [2, 2, 2, -1]
     ])
 
-
+    payoff_matrix2 = np.array([
+        [-2, 2, 2, 2],
+        [3, -1, 3, 3],
+        [1, 1, -3, 1],
+        [3, 3, 3, -1]
+    ])
 
     # Solve for hider
     print("=== Solving for Hider ===")
-    display_solution(payoff_matrix, "hider")
+    display_solution(payoff_matrix1, "hider")
 
     # Solve for seeker
     print("\n=== Solving for Seeker ===")
-    display_solution(payoff_matrix, "seeker")
+    display_solution(payoff_matrix1, "seeker")
