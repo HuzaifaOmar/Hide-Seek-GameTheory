@@ -1,6 +1,6 @@
-from src.gamelogic.gamegrid.grid2d.gamegrid2d import GameGrid2d
-from src.gamelogic.gamegrid.lineargrid.linear_approximate_gamegrid import LinearProximityGameGrid
-from src.gamelogic.gamegrid.lineargrid.linear_gamegrid import LinearGameGrid
+from src.game.gamelogic.gamegrid.grid2d.gamegrid2d import GameGrid2d
+from src.game.gamelogic.gamegrid.lineargrid.linear_approximate_gamegrid import LinearProximityGameGrid
+from src.game.gamelogic.gamegrid.lineargrid.linear_gamegrid import LinearGameGrid
 
 
 def create_game_grid(size, grid_type="linear", use_proximity=False):

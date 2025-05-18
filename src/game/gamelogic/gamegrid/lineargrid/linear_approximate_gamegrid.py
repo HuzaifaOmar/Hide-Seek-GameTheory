@@ -1,9 +1,14 @@
-from src.gamelogic.gamegrid.lineargrid.linear_gamegrid import LinearGameGrid
-from src.gamelogic.gamegrid.place_type import PlaceType
+from src.game.gamelogic.gamegrid.abstract_gamegrid import AbstractGameGrid
+from src.game.gamelogic.gamegrid.lineargrid.linear_gamegrid import LinearGameGrid
+from src.game.gamelogic.gamegrid.place_type import PlaceType
 
 
-class LinearProximityGameGrid(LinearGameGrid):
+class LinearProximityGameGrid(AbstractGameGrid):
+    def _calculate_distance(self, pos1, pos2):
+        return abs(pos1 - pos2)
+
     def _generate_payoff_matrix(self):
+
         base_matrix = self._generate_base_payoff_matrix()
         proximity_matrix = base_matrix.copy()
 

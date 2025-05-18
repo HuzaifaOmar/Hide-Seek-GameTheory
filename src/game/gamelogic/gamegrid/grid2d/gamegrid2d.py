@@ -1,7 +1,7 @@
 import math
 
-from src.gamelogic.gamegrid.abstract_gamegrid import AbstractGameGrid
-from src.gamelogic.gamegrid.place_type import PlaceType
+from src.game.gamelogic.gamegrid.abstract_gamegrid import AbstractGameGrid
+from src.game.gamelogic.gamegrid.place_type import PlaceType
 
 
 class GameGrid2d(AbstractGameGrid):

@@ -48,7 +48,7 @@ class AbstractGameGrid(ABC):
         return multiplier
 
     def get_payoff_matrix(self):
-        return self.base_payoff_matrix
+        return self._generate_payoff_matrix()
 
     @abstractmethod
     def _calculate_distance(self, pos1, pos2):

@@ -1,7 +1,7 @@
 import numpy as np
 
-from src.gamelogic.gamegrid.gamegrid_factory import create_game_grid
-from src.gamelogic.gamegrid.place_type import PlaceType
+from src.game.gamelogic.gamegrid.gamegrid_factory import create_game_grid
+from src.game.gamelogic import PlaceType
 
 
 def test_payoff_example():
