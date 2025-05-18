@@ -81,16 +81,6 @@ class LPGameSolver:
         }
 
 def solve_payoff_matrix(payoff_matrix, player="hider"):
-    """
-    Solve the Hide and Seek game for the specified player.
-
-    Args:
-        payoff_matrix (np.ndarray): 2D array representing the hider's payoff matrix
-        player (str): Either "hider" or "seeker"
-
-    Returns:
-        tuple: (probabilities, expected_value)
-    """
     solver = LPGameSolver(payoff_matrix)
 
     if player.lower() == "hider":
