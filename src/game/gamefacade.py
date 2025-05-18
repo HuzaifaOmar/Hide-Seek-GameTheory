@@ -24,7 +24,6 @@ class GameFacade:
         self.round_number = 0
         self.human_wins = 0
         self.computer_wins = 0
-        # self.game_history = []
         self.computer_strategy = None
         self.is_game_running = False
 

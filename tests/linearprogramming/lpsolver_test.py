@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+from src.game.gamelogic.gamegrid.grid2d.gamegrid2d import GameGrid2d
+from src.game.gamelogic.gamegrid.lineargrid.linear_approximate_gamegrid import LinearProximityGameGrid
+from src.game.gamelogic.gamegrid.lineargrid.linear_gamegrid import LinearGameGrid
 from src.linearprogramming.lp_gamesolver import solve_payoff_matrix
 
 
@@ -46,25 +49,14 @@ def display_solution(payoff_matrix, player="hider"):
 
 # Example usage
 if __name__ == "__main__":
-    # Example from the assignment
-    payoff_matrix1 = np.array([
-        [-1, 1, 1, 1],
-        [2, -1, 2, 2],
-        [1, 1, -3, 1],
-        [2, 2, 2, -1]
-    ])
-
-    payoff_matrix2 = np.array([
-        [-2, 2, 2, 2],
-        [3, -1, 3, 3],
-        [1, 1, -3, 1],
-        [3, 3, 3, -1]
-    ])
+    payoff_matrix_linear = LinearGameGrid(4).get_payoff_matrix()
+    payoff_matrix_linear_approx = LinearProximityGameGrid(4).get_payoff_matrix()
+    payoff_matrix_2d_approx = GameGrid2d(9).get_payoff_matrix()
 
     # Solve for hider
     print("=== Solving for Hider ===")
-    display_solution(payoff_matrix1, "hider")
+    display_solution(payoff_matrix_linear_approx, "hider")
 
     # Solve for seeker
     print("\n=== Solving for Seeker ===")
-    display_solution(payoff_matrix1, "seeker")
+    display_solution(payoff_matrix_linear_approx, "seeker")
