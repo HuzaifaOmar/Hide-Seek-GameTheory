@@ -17,7 +17,7 @@ const GameSetup: React.FC = () => {
 
   const handleGridSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const size = parseInt(e.target.value, 10);
-    if (!isNaN(size) && size >= 2 && size <= 10) {
+    if (!isNaN(size) && size >= 2 && size <= 100) {
       updateSettings({ gridSize: size });
     }
   };
@@ -102,12 +102,12 @@ const GameSetup: React.FC = () => {
       
       <div className="mb-6">
         <label className="block text-sm font-medium text-slate-700 mb-2">
-          Grid Size (2-10)
+          Grid Size (2-100)
         </label>
         <input
           type="number"
           min="2"
-          max="10"
+          max="100"
           value={settings.gridSize}
           onChange={handleGridSizeChange}
           className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

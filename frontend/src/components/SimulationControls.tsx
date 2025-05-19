@@ -31,7 +31,7 @@ const SimulationControls: React.FC = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-6 w-full max-w-md">
       <h2 className="text-xl font-semibold mb-4 text-slate-800">Simulation Settings</h2>
-      
+
       <div className="mb-4">
         <label className="block text-sm font-medium text-slate-700 mb-2">Grid Type</label>
         <select
@@ -44,46 +44,35 @@ const SimulationControls: React.FC = () => {
           <option value="2d-approximation">2D with Approximation</option>
         </select>
       </div>
-      
+
       <div className="mb-4">
         <label className="block text-sm font-medium text-slate-700 mb-2">
           Grid Size: {settings.gridSize}
         </label>
         <input
-          type="range"
+          type="number"
           min="2"
-          max="10"
+          max="100"
           value={settings.gridSize}
           onChange={(e) => updateSettings({ gridSize: parseInt(e.target.value, 10) })}
-          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+          className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <div className="flex justify-between text-xs text-slate-500 mt-1">
-          <span>2</span>
-          <span>6</span>
-          <span>10</span>
-        </div>
       </div>
-      
+
       <div className="mb-6">
         <label className="block text-sm font-medium text-slate-700 mb-2">
           Number of Rounds: {rounds}
         </label>
         <input
-          type="range"
+          type="number"
           min="10"
           max="1000"
-          step="10"
           value={rounds}
           onChange={handleRoundsChange}
-          className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+          className="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <div className="flex justify-between text-xs text-slate-500 mt-1">
-          <span>10</span>
-          <span>500</span>
-          <span>1000</span>
-        </div>
       </div>
-      
+
       <button
         className="w-full py-3 px-4 bg-indigo-600 text-white rounded-md font-medium flex items-center justify-center transition-colors hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
         onClick={handleRunSimulation}
