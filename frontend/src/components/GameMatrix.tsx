@@ -53,44 +53,46 @@ const GameMatrix: React.FC = () => {
         <h3 className="text-lg font-semibold mb-3 text-slate-700">
           Location Types
         </h3>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {gameState.placeTypes.map((type, index) => (
             <div key={index} className="flex items-center py-1 px-2 rounded-md">
               <div
                 className={`w-4 h-4 rounded-full mr-2 ${getCellTypeColor(
-                  type
+                  type.toLowerCase()
                 )}`}
               ></div>
               <span className="text-sm">
                 Place {index + 1}:{" "}
-                {type.charAt(0).toUpperCase() + type.slice(1)}
+                {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
               </span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="mt-6">
-        <h3 className="text-lg font-semibold mb-3 text-slate-700">
-          Probabilities
-        </h3>
-        <div className="space-y-3">
-          {gameState.computerStrategy?.probabilities.map((prob, index) => (
-            <div key={index}>
-              <div className="flex justify-between text-sm mb-1">
-                <span>Position {index + 1}</span>
-                <span>{(prob * 100).toFixed(1)}%</span>
+      {gameState.computerStrategy && (
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold mb-3 text-slate-700">
+            Probabilities
+          </h3>
+          <div className="space-y-3">
+            {gameState.computerStrategy.probabilities.map((prob, index) => (
+              <div key={index}>
+                <div className="flex justify-between text-sm mb-1">
+                  <span>Position {index + 1}</span>
+                  <span>{(prob * 100).toFixed(1)}%</span>
+                </div>
+                <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500"
+                    style={{ width: `${prob * 100}%` }}
+                  ></div>
+                </div>
               </div>
-              <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-blue-500"
-                  style={{ width: `${prob * 100}%` }}
-                ></div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

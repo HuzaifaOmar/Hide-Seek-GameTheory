@@ -35,7 +35,7 @@ const GameBoard: React.FC = () => {
 
   const renderLinearGrid = () => {
     return (
-      <div className="flex flex-wrap justify-center gap-6 mb-6 max-w-5xl">
+      <div className="flex flex-wrap justify-center gap-6 mb-6 max-w-5xl mx-auto">
         {gameState.placeTypes.map((type, index) => {
           const isPlayerChoice = gameState.humanPosition === index;
           const isComputerChoice = gameState.computerPosition === index;

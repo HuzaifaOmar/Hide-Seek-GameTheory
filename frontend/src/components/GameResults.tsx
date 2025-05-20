@@ -1,6 +1,6 @@
 import React from "react";
 import { useGame } from "../contexts/GameContext";
-import { Award, RotateCcw } from "lucide-react";
+import { Award, RotateCcw, Shield, Target } from "lucide-react";
 
 const GameResults: React.FC = () => {
   const { gameState, resetGame, loading } = useGame();
@@ -19,6 +19,8 @@ const GameResults: React.FC = () => {
       ? Math.round((gameState.computerWins / gameState.round) * 100)
       : 0;
 
+  const isHumanHider = gameState.humanRole === "hider";
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-md">
       <div className="flex justify-between items-center mb-6">
@@ -31,6 +33,35 @@ const GameResults: React.FC = () => {
           <RotateCcw className="w-4 h-4 mr-1" />
           Reset Game
         </button>
+      </div>
+
+      <div className="flex items-center justify-center gap-3 mb-4 text-sm text-slate-600">
+        <div className="flex items-center">
+          <div className="flex items-center bg-blue-100 text-blue-800 px-2 py-1 rounded-md">
+            {isHumanHider ? (
+              <>
+                <Shield className="w-4 h-4 mr-1" /> You: Hider
+              </>
+            ) : (
+              <>
+                <Target className="w-4 h-4 mr-1" /> You: Seeker
+              </>
+            )}
+          </div>
+        </div>
+        <div className="flex items-center">
+          <div className="flex items-center bg-red-100 text-red-800 px-2 py-1 rounded-md">
+            {isHumanHider ? (
+              <>
+                <Target className="w-4 h-4 mr-1" /> Computer: Seeker
+              </>
+            ) : (
+              <>
+                <Shield className="w-4 h-4 mr-1" /> Computer: Hider
+              </>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-6 mb-6">

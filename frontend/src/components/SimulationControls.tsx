@@ -4,7 +4,7 @@ import { Play, Loader } from "lucide-react";
 import { GridType } from "../types/game";
 
 const SimulationControls: React.FC = () => {
-  const { settings, updateSettings, runSimulation, loading } = useGame();
+  const { settings, updateSettings, runSimulation, initializeGame, loading } = useGame();
   const [rounds, setRounds] = useState(settings.simulationRounds || 100);
 
   const handleRoundsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +44,7 @@ const SimulationControls: React.FC = () => {
   };
 
   const handleRunSimulation = async () => {
+    await initializeGame();
     await runSimulation();
   };
 
