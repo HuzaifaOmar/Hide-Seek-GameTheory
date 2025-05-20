@@ -15,7 +15,7 @@ class GameSimulation:
     def setup_simulation(self):
         self.game_facade.reset_game()
         self.game_facade.start_new_game(PlayerRole.SEEKER)
-        self.seeker_strategy = solve_payoff_matrix(self.game_facade.payoff_matrix, player="hider")['probabilities']
+        self.seeker_strategy = solve_payoff_matrix(self.game_facade.payoff_matrix, player="hider")[0]
 
     def run_simulation(self, num_rounds=100):
         self.setup_simulation()

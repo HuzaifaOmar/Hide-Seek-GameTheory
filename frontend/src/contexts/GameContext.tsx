@@ -12,7 +12,7 @@ import {
   InitializeResponse,
   StartGameResponse,
   PlayRoundResponse,
-  GameStateResponse,
+  // GameStateResponse,
 } from "../types/game";
 import * as gameApi from "../services/api";
 
@@ -123,6 +123,7 @@ export function GameProvider({ children }: GameProviderProps) {
       );
 
       if (response.status === "success") {
+        console.log("startGame response", response);
         setGameState((prev) => ({
           ...prev,
           humanRole: response.human_role as PlayerRole,
@@ -217,7 +218,7 @@ export function GameProvider({ children }: GameProviderProps) {
         settings.gridType,
         settings.simulationRounds
       );
-
+      console.log("runSimulation response", response);
       if (response.status === "success") {
         setGameState((prev) => ({
           ...prev,
@@ -237,30 +238,30 @@ export function GameProvider({ children }: GameProviderProps) {
     }
   };
 
-  const fetchGameState = async () => {
-    try {
-      const response: GameStateResponse = await gameApi.getGameState();
-      const state = response.game_state;
+  // const fetchGameState = async () => {
+  //   try {
+  //     const response: GameStateResponse = await gameApi.getGameState();
+  //     const state = response.game_state;
 
-      setGameState({
-        round: state.round,
-        humanScore: state.human_score,
-        computerScore: state.computer_score,
-        humanWins: state.human_wins,
-        computerWins: state.computer_wins,
-        payoffMatrix: state.payoff_matrix,
-        humanRole: state.human_role as PlayerRole,
-        computerRole: state.computer_role as PlayerRole,
-        humanPosition: state.human_position,
-        computerPosition: state.computer_position,
-        winner: state.winner,
-        isGameRunning: state.is_game_running,
-        placeTypes: [], // Will be populated by initialize
-      });
-    } catch (error) {
-      console.error("Failed to fetch game state:", error);
-    }
-  };
+  //     setGameState({
+  //       round: state.round,
+  //       humanScore: state.human_score,
+  //       computerScore: state.computer_score,
+  //       humanWins: state.human_wins,
+  //       computerWins: state.computer_wins,
+  //       payoffMatrix: state.payoff_matrix,
+  //       humanRole: state.human_role as PlayerRole,
+  //       computerRole: state.computer_role as PlayerRole,
+  //       humanPosition: state.human_position,
+  //       computerPosition: state.computer_position,
+  //       winner: state.winner,
+  //       isGameRunning: state.is_game_running,
+  //       placeTypes: [], // Will be populated by initialize
+  //     });
+  //   } catch (error) {
+  //     console.error("Failed to fetch game state:", error);
+  //   }
+  // };
 
   const nextRound = () => {
     setGameState((prev) => ({

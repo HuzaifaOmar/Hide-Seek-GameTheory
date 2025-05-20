@@ -13,7 +13,8 @@ simulation_game = None
 def initialize_game():
     data = request.json
     grid_size = data.get('grid_size', 4)
-    grid_type = 'linear' if data.get('grid_type', 'linear') == 'linear' or data.get('grid_type', 'linear') == 'linear-approximation' else '2d'
+    grid_type = 'linear' if data.get('grid_type', 'linear') == 'linear' or data.get('grid_type',
+                                                                                    'linear') == 'linear-approximation' else '2d'
     use_proximity = False if data.get('grid_type', 'linear') == 'linear' else True
 
     global interactive_game
@@ -112,8 +113,9 @@ def get_game_state():
 def run_simulation():
     data = request.json
     grid_size = data.get('grid_size', 4)
-    grid_type = data.get('grid_type', 'linear')
-    use_proximity = data.get('use_proximity', False)
+    grid_type = 'linear' if data.get('grid_type', 'linear') == 'linear' or data.get('grid_type',
+                                                                                    'linear') == 'linear-approximation' else '2d'
+    use_proximity = False if data.get('grid_type', 'linear') == 'linear' else True
     num_rounds = data.get('num_rounds', 100)
 
     global simulation_game
@@ -137,5 +139,3 @@ def run_simulation():
         'computer_wins': simulation_game.game_facade.computer_wins,
         'game_state': state
     })
-
-

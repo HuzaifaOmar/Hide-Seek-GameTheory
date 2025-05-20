@@ -12,4 +12,5 @@ def create_game_grid(size, grid_type="linear", use_proximity=False):
     elif grid_type.lower() == "2d":
             return GameGrid2d(size)
     else:
-        raise ValueError(f"Invalid grid type: {grid_type}. Must be 'linear' or '2d'.")
+        print(f"Received grid type: {grid_type}")
+        raise ValueError("Invalid grid type. Must be 'linear' or '2d'.")

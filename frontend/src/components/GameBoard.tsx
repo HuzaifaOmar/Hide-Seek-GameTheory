@@ -1,6 +1,6 @@
 import React from "react";
 import { useGame } from "../contexts/GameContext";
-import { getCellTypeColor } from "../utils/gameUtils";
+import { getCellTypeColor, getGridDimensions } from "../utils/gameUtils";
 
 const GameBoard: React.FC = () => {
   const { settings, gameState, makeMove, loading, nextRound } = useGame();
@@ -90,14 +90,14 @@ const GameBoard: React.FC = () => {
   };
 
   const renderGrid2D = () => {
-    const gridSize = Math.ceil(Math.sqrt(settings.gridSize));
+    const { cols } = getGridDimensions(settings.gridSize);
 
     return (
       <div
         className="grid gap-4 mb-6 mx-auto"
         style={{
-          gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))`,
-          maxWidth: `${Math.min(gridSize * 120, 720)}px`,
+          gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+          maxWidth: `${Math.min(cols * 120, 720)}px`,
         }}
       >
         {gameState.placeTypes.map((type, index) => {
