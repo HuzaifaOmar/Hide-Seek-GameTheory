@@ -8,7 +8,7 @@ export interface GameSettings {
   humanRole: PlayerRole;
   gridType: string;
   gridSize: number;
-  simulationRounds?: number;
+  simulationRounds: number;
 }
 
 export interface GameState {

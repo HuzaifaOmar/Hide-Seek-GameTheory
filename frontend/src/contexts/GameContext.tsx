@@ -21,7 +21,6 @@ const defaultSettings: GameSettings = {
   humanRole: "hider",
   gridType: "linear",
   gridSize: 5,
-  useProximity: false,
   simulationRounds: 100,
 };
 
@@ -74,9 +73,14 @@ export function GameProvider({ children }: GameProviderProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleApiError = (error: any) => {
+  const handleApiError = (error: unknown) => {
     console.error("API Error:", error);
-    setError(error.response?.data?.message || "An error occurred");
+    setError(
+      error instanceof Error
+        ? error.message
+        : (error as { response?: { data?: { message?: string } } })?.response
+            ?.data?.message || "An error occurred"
+    );
     setLoading(false);
   };
 
@@ -90,8 +94,7 @@ export function GameProvider({ children }: GameProviderProps) {
     try {
       const response: InitializeResponse = await gameApi.initializeGame(
         settings.gridSize,
-        settings.gridType,
-        settings.useProximity
+        settings.gridType
       );
 
       if (response.status === "success") {
@@ -212,7 +215,6 @@ export function GameProvider({ children }: GameProviderProps) {
       const response = await gameApi.runSimulation(
         settings.gridSize,
         settings.gridType,
-        settings.useProximity,
         settings.simulationRounds
       );
 

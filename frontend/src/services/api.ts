@@ -48,13 +48,11 @@ export const getGameState = async () => {
 export const runSimulation = async (
   gridSize: number,
   gridType: string,
-  useProximity: boolean,
   numRounds: number
 ) => {
   const response = await api.post("/run-simulation", {
     grid_size: gridSize,
     grid_type: gridType,
-    use_proximity: useProximity,
     num_rounds: numRounds,
   });
   return response.data;
