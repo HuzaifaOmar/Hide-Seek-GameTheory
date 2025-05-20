@@ -22,7 +22,7 @@ const GameResults: React.FC = () => {
   const isHumanHider = gameState.humanRole === "hider";
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-md">
+    <div className="bg-white rounded-lg shadow-md p-6 w-full">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold text-slate-800">Game Results</h2>
         <button

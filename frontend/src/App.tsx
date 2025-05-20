@@ -28,8 +28,10 @@ function GameContent() {
           <GameSetup />
           <SimulationControls />
           <GameBoard />
-          {settings.mode === "simulation" && <GameMatrix />}
-          <GameResults />
+          <div className="w-full max-w-3xl mt-4 space-y-6">
+            {settings.mode === "simulation" && <GameMatrix />}
+            <GameResults />
+          </div>
         </div>
       </main>
     </div>

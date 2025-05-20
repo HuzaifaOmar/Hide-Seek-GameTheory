@@ -9,9 +9,9 @@ const GameMatrix: React.FC = () => {
     return null;
   }
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-md">
+    <div className="bg-white rounded-lg shadow-md p-6 w-full">
       <h2 className="text-xl font-semibold mb-4 text-slate-800">Game Matrix</h2>
-
+      
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse">
           <thead>
