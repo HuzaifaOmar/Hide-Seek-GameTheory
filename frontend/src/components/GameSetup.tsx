@@ -7,8 +7,8 @@ const GameSetup: React.FC = () => {
   const { settings, updateSettings, startGame } = useGame();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleRoleChange = (role: PlayerRole) => {
-    updateSettings({ role });
+  const handleRoleChange = (humanRole: PlayerRole) => {
+    updateSettings({ humanRole });
   };
 
   const handleGridTypeChange = (gridType: GridType) => {
@@ -43,7 +43,7 @@ const GameSetup: React.FC = () => {
         <div className="flex space-x-2">
           <button
             className={`flex-1 py-2 px-4 rounded-md transition-colors ${
-              settings.role === 'hider'
+              settings.humanRole === 'hider'
                 ? 'bg-blue-500 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
@@ -53,7 +53,7 @@ const GameSetup: React.FC = () => {
           </button>
           <button
             className={`flex-1 py-2 px-4 rounded-md transition-colors ${
-              settings.role === 'seeker'
+              settings.humanRole === 'seeker'
                 ? 'bg-blue-500 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
@@ -89,11 +89,11 @@ const GameSetup: React.FC = () => {
           </button>
           <button
             className={`py-2 px-4 rounded-md transition-colors text-left ${
-              settings.gridType === '2d-approximation'
+              settings.gridType === '2d'
                 ? 'bg-blue-500 text-white'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
-            onClick={() => handleGridTypeChange('2d-approximation')}
+            onClick={() => handleGridTypeChange('2d')}
           >
             2D with Approximation
           </button>

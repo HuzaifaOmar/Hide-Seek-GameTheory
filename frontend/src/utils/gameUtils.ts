@@ -58,16 +58,16 @@ export function generateCellTypes(size: number): CellType[] {
 /**
  * Gets the color for a cell based on its type
  */
-export function getCellTypeColor(type: CellType): string {
+export function getCellTypeColor(type: string): string {
   switch (type) {
-    case 'easy':
-      return 'bg-green-500 hover:bg-green-600';
-    case 'neutral':
-      return 'bg-yellow-500 hover:bg-yellow-600';
-    case 'hard':
-      return 'bg-red-500 hover:bg-red-600';
+    case "easy":
+      return "bg-green-500 hover:bg-green-600";
+    case "neutral":
+      return "bg-yellow-500 hover:bg-yellow-600";
+    case "hard":
+      return "bg-red-500 hover:bg-red-600";
     default:
-      return 'bg-gray-400 hover:bg-gray-500';
+      return "bg-gray-400 hover:bg-gray-500";
   }
 }
 

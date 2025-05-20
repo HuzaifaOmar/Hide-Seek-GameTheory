@@ -41,7 +41,7 @@ const SimulationControls: React.FC = () => {
         >
           <option value="linear">Linear</option>
           <option value="linear-approximation">Linear with Approximation</option>
-          <option value="2d-approximation">2D with Approximation</option>
+          <option value="2d">2D with Approximation</option>
         </select>
       </div>
 

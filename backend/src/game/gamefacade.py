@@ -89,10 +89,15 @@ class GameFacade:
             "round_number": self.round_number
         }
 
-    def _evaluate_round(self, hider_positon, seeker_position):
-        score = self.game_grid.get_place_score(seeker_position, "seeker")
-        winner = ("seeker" if hider_positon == seeker_position else "hider")
+    def _evaluate_round(self, hider_position, seeker_position):
+        score = self.game_grid.get_place_score(seeker_position, "seeker") 
+        winner = ("seeker" if hider_position == seeker_position else "hider")
 
+        if winner == "hider" and self.use_proximity:
+            distance = self.game_grid._calculate_distance(hider_position, seeker_position)
+            multiplier = self.game_grid._apply_proximity_multiplier(distance)
+            score = score * multiplier
+            
         # Human wins
         if (winner == "hider" and self.human_role == PlayerRole.HIDER) or (winner == "seeker" and self.human_role == PlayerRole.SEEKER):
             self.human_score += score

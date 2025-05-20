@@ -13,8 +13,8 @@ simulation_game = None
 def initialize_game():
     data = request.json
     grid_size = data.get('grid_size', 4)
-    grid_type = data.get('grid_type', 'linear')
-    use_proximity = data.get('use_proximity', False)
+    grid_type = 'linear' if data.get('grid_type', 'linear') == 'linear' or data.get('grid_type', 'linear') == 'linear-approximation' else '2d'
+    use_proximity = False if data.get('grid_type', 'linear') == 'linear' else True
 
     global interactive_game
     interactive_game = GameFacade(grid_size, grid_type, use_proximity)
@@ -37,7 +37,7 @@ def start_game():
     data = request.json
     human_role = data.get('human_role', 'seeker')
     role = PlayerRole.HIDER if human_role.lower() == 'hider' else PlayerRole.SEEKER
-    game_data = not interactive_game.start_new_game(role)
+    game_data = interactive_game.start_new_game(role)
 
     return jsonify({
         'status': 'success',

@@ -12,13 +12,11 @@ const api = axios.create({
 // Game API functions
 export const initializeGame = async (
   gridSize: number,
-  gridType: string,
-  useProximity: boolean
+  gridType: string
 ) => {
   const response = await api.post("/initialize", {
     grid_size: gridSize,
     grid_type: gridType,
-    use_proximity: useProximity,
   });
   return response.data;
 };
