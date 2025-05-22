@@ -137,5 +137,8 @@ def run_simulation():
         'computer_score': simulation_game.game_facade.computer_score,
         'human_wins': simulation_game.game_facade.human_wins,
         'computer_wins': simulation_game.game_facade.computer_wins,
-        'game_state': state
+        'game_state': state,
+        'computer_strategy': {
+            'probabilities': simulation_game.game_facade.computer_strategy['probabilities'].tolist(),
+        }
     })

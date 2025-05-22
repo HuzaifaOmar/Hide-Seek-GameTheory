@@ -229,6 +229,7 @@ export function GameProvider({ children }: GameProviderProps) {
           computerWins: response.computer_wins,
           payoffMatrix: response.game_state.payoff_matrix,
           isGameRunning: false,
+          computerStrategy: response.computer_strategy,
         }));
       }
     } catch (error) {
